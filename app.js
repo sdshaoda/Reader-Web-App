@@ -1,14 +1,17 @@
 var koa = require('koa')
 var controller = require('koa-route')
 var views = require('co-views')
+// 静态文件中间件
+var koa_static = require('koa-static-server')
+
+var service = require('./service/webAppService.js')
 
 var app = koa()
 var render = views('./view', {
     // 使用EJS模板引擎
     map: { html: 'ejs' }
 })
-// 静态文件中间件
-var koa_static = require('koa-static-server')
+
 
 // 访问静态资源文件
 app.use(koa_static({
@@ -29,6 +32,11 @@ app.use(controller.get('/route_test', function* () {
 app.use(controller.get('/ejs_test', function* () {
     this.set('cache-control', 'no-cache')
     this.body = yield render('test', { title: 'title_test' })
+}))
+
+app.use(controller.get('/api_test', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = service.get_test_data()
 }))
 
 app.listen(3000)
