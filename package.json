@@ -1,0 +1,19 @@
+{
+  "name": "reader-web-app",
+  "version": "1.0.0",
+  "description": "developed by Vue.js Node.js Koa EJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdshaoda/Reader-Web-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdshaoda/Reader-Web-App/issues"
+  },
+  "homepage": "https://github.com/sdshaoda/Reader-Web-App#readme"
+}
