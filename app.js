@@ -41,7 +41,28 @@ app.use(controller.get('/api_test', function* () {
     this.body = service.get_test_data()
 }))
 
+// 首页
+app.use(controller.get('/', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = yield render('index', { title: '书城首页' })
+}))
+
 // 书籍
+app.use(controller.get('/book', function* () {
+    this.set('cache-control', 'no-cache')
+    var querystring = require('querystring')
+    var params = querystring.parse(this.req._parsedUrl.query)
+    var bookId = params.id
+    this.body = yield render('book', { bookId })
+}))
+
+// 搜索
+app.use(controller.get('/search', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = yield render('search', { title: '书城首页' })
+}))
+
+// Ajax书籍
 app.use(controller.get('/ajax/book', function* () {
     this.set('cache-control', 'no-cache')
     var querystring = require('querystring')
@@ -53,25 +74,25 @@ app.use(controller.get('/ajax/book', function* () {
     this.body = service.get_book_data(id)
 }))
 
-// 首页
+// Ajax首页
 app.use(controller.get('/ajax/index', function* () {
     this.set('cache-control', 'no-cache')
     this.body = service.get_index_data()
 }))
 
-// 排行
+// Ajax排行
 app.use(controller.get('/ajax/rank', function* () {
     this.set('cache-control', 'no-cache')
     this.body = service.get_rank_data()
 }))
 
-// 书架
+// Ajax书架
 app.use(controller.get('/ajax/bookbacket', function* () {
     this.set('cache-control', 'no-cache')
     this.body = service.get_bookbacket_data()
 }))
 
-// 分类
+// Ajax分类
 app.use(controller.get('/ajax/category', function* () {
     this.set('cache-control', 'no-cache')
     this.body = service.get_category_data()
