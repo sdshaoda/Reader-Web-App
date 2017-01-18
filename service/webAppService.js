@@ -8,6 +8,40 @@ exports.get_test_data = function () {
     return content
 }
 
+// 书籍
+exports.get_book_data = function (id) {
+    if (!id) {
+        id = '18218'
+    }
+    var content = fs.readFileSync('./mock/book/' + id + '.json', 'utf-8')
+    return content
+}
+
+// 首页
+exports.get_index_data = function () {
+    var content = fs.readFileSync('./mock/home.json', 'utf-8')
+    return content
+}
+
+// 排行
+exports.get_rank_data = function () {
+    var content = fs.readFileSync('./mock/rank.json', 'utf-8')
+    return content
+}
+
+// 书架
+exports.get_bookbacket_data = function () {
+    var content = fs.readFileSync('./mock/bookbacket.json', 'utf-8')
+    return content
+}
+
+// 分类
+exports.get_category_data = function () {
+    var content = fs.readFileSync('./mock/category.json', 'utf-8')
+    return content
+}
+
+
 // 线上HTTP接口
 exports.get_search_data = function (start, end, keyword) {
     return function (cb) {

@@ -41,6 +41,42 @@ app.use(controller.get('/api_test', function* () {
     this.body = service.get_test_data()
 }))
 
+// 书籍
+app.use(controller.get('/ajax/book', function* () {
+    this.set('cache-control', 'no-cache')
+    var querystring = require('querystring')
+    var params = querystring.parse(this.req._parsedUrl.query)
+    var id = params.id
+    if (!id) {
+        id = '18218'
+    }
+    this.body = service.get_book_data(id)
+}))
+
+// 首页
+app.use(controller.get('/ajax/index', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = service.get_index_data()
+}))
+
+// 排行
+app.use(controller.get('/ajax/rank', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = service.get_rank_data()
+}))
+
+// 书架
+app.use(controller.get('/ajax/bookbacket', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = service.get_bookbacket_data()
+}))
+
+// 分类
+app.use(controller.get('/ajax/category', function* () {
+    this.set('cache-control', 'no-cache')
+    this.body = service.get_category_data()
+}))
+
 // 获取线上HTTP接口数据
 app.use(controller.get('/ajax/search', function* () {
     this.set('cache-control', 'no-cache')
