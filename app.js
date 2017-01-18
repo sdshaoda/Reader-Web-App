@@ -24,6 +24,7 @@ app.use(koa_static({
 
 // 实现路由
 app.use(controller.get('/route_test', function* () {
+    // 不缓存
     this.set('cache-control', 'no-cache')
     this.body = 'Hello koa!'
 }))
@@ -34,9 +35,22 @@ app.use(controller.get('/ejs_test', function* () {
     this.body = yield render('test', { title: 'title_test' })
 }))
 
+// 获取mock数据
 app.use(controller.get('/api_test', function* () {
     this.set('cache-control', 'no-cache')
     this.body = service.get_test_data()
+}))
+
+// 获取线上HTTP接口数据
+app.use(controller.get('/ajax/search', function* () {
+    this.set('cache-control', 'no-cache')
+    var querystring = require('querystring')
+    // 解析查询字符串
+    var params = querystring.parse(this.req._parsedUrl.query)
+    var start = params.start
+    var end = params.end
+    var keyword = params.keyword
+    this.body = yield service.get_search_data(start, end, keyword)
 }))
 
 app.listen(3000)
