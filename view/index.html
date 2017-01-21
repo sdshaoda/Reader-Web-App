@@ -7,11 +7,24 @@
     <meta name="format-detection" content="telephone=no">
     <!--注意文件里的href和src路径是URL路径-->
     <link rel="stylesheet" type="text/css" href="/static/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <title>书城首页</title>
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root">
+        <!--EJS模板包含语法 模块化开发-->
+        <% include include/header.html %>
+        <div>
+            <% include include/index-top.html %>
+            <% include include/index-hot.html %>
+            <% include include/index-recommend.html %>
+            <% include include/index-female.html %>
+            <% include include/index-male.html %>
+            <% include include/index-free.html %>
+            <% include include/index-bottom.html %>
+        </div>
+    </div>
 
     <script src="/static/js/vue.js"></script>
     <script src="/static/js/zepto.js"></script>
